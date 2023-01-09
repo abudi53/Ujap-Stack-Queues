@@ -1,4 +1,19 @@
 import datetime
+import pickle
+
+def guardarObjeto(obj):
+    try:
+        with open("data.pickle", "wb") as f:
+            pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
+    except Exception as ex:
+        print("Error during pickling object (Possibly unsupported):", ex)
+
+def cargarObjeto(filename):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except Exception as ex:
+        print("Error during unpickling object (Possibly unsupported):", ex)
 
 class Estructura():
     def __init__(self) -> None:
@@ -6,10 +21,11 @@ class Estructura():
         self.cDir = Directorio("C:", self.path)
         self.pathlist = [self.cDir]
         self.currentDir = self.cDir
+        self.pathlist = cargarObjeto("data.pickle")
         while True:
+            guardarObjeto(self.pathlist)         
             self.currentDir = self.pathlist[-1]
             self.path = self.currentDir.path
-            #print("CURRENT IS" + self.currentDir.nombre)
             orden = input(self.currentDir.path + "> ")
             if orden[:2] == "cd": #******CD*********
                 self.changeDir(orden[2:])
