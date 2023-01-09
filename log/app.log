@@ -1,0 +1,69 @@
+2023-01-09 12:49:13,422 - root - WARNING - dir
+2023-01-09 12:49:16,323 - root - WARNING - cd lasso
+2023-01-09 12:49:17,466 - root - WARNING - dir
+2023-01-09 13:19:12,027 - mylogger - INFO - cd..
+2023-01-09 13:19:17,767 - mylogger - INFO - cd ujap
+2023-01-09 13:19:22,616 - mylogger - INFO - cd 1231
+2023-01-09 13:19:27,723 - mylogger - INFO - mkdi 
+2023-01-09 13:19:32,514 - mylogger - INFO - mkdir hola
+2023-01-09 13:19:35,827 - mylogger - INFO - mkdir hola
+2023-01-09 13:19:37,254 - mylogger - INFO - dir
+2023-01-09 13:19:45,645 - mylogger - INFO - cd hola
+2023-01-09 13:19:47,341 - mylogger - INFO - dir
+2023-01-09 13:19:53,547 - mylogger - INFO - cd..
+2023-01-09 13:19:57,557 - mylogger - INFO - rmdir hola
+2023-01-09 13:20:05,681 - mylogger - INFO - cd..
+2023-01-09 13:20:06,922 - mylogger - INFO - cd..
+2023-01-09 13:20:11,600 - mylogger - INFO - rmdir hola
+2023-01-09 13:20:14,193 - mylogger - INFO - dir
+2023-01-09 13:20:20,993 - mylogger - INFO - cd hola
+2023-01-09 13:20:22,312 - mylogger - INFO - cd..
+2023-01-09 13:24:20,279 - mylogger - INFO - dir
+2023-01-09 13:24:25,523 - mylogger - INFO - mkdir hola
+2023-01-09 13:24:27,017 - mylogger - INFO - dir
+2023-01-09 13:24:31,454 - mylogger - INFO - rmdir hola
+2023-01-09 13:26:17,874 - mylogger - INFO - dir
+2023-01-09 13:26:23,603 - mylogger - INFO - mkdir hola
+2023-01-09 13:26:26,382 - mylogger - INFO - rmdir hola
+2023-01-09 13:26:28,623 - mylogger - INFO - dir
+2023-01-09 13:55:24,007 - mylogger - INFO - log
+2023-01-09 13:57:56,867 - mylogger - INFO - dir
+2023-01-09 13:58:00,525 - mylogger - INFO - mkdir hola
+2023-01-09 13:58:01,659 - mylogger - INFO - dir
+2023-01-09 13:58:09,345 - mylogger - INFO - rmdir hola
+2023-01-09 13:58:11,015 - mylogger - INFO - dir
+2023-01-09 14:02:47,294 - mylogger - INFO - dir
+2023-01-09 14:02:49,821 - mylogger - INFO - mkdir hola
+2023-01-09 14:02:51,759 - mylogger - INFO - dir
+2023-01-09 14:05:41,583 - mylogger - INFO - create hola.txt
+2023-01-09 14:05:42,973 - mylogger - INFO - dir
+2023-01-09 14:06:04,675 - mylogger - INFO - rmdir hola.txt
+2023-01-09 14:06:42,299 - mylogger - INFO - dir
+2023-01-09 14:06:54,766 - mylogger - INFO - rmdir hola.txt
+2023-01-09 14:07:00,502 - mylogger - INFO - remove hola.txt
+2023-01-09 14:07:02,563 - mylogger - INFO - dir
+2023-01-09 14:07:26,108 - mylogger - INFO - remove  hola.txt
+2023-01-09 14:07:32,992 - mylogger - INFO - rmdir  hola.txt
+2023-01-09 14:07:34,557 - mylogger - INFO - dir
+2023-01-09 14:07:40,719 - mylogger - INFO - create hola.txt
+2023-01-09 14:07:41,884 - mylogger - INFO - dir
+2023-01-09 14:07:47,890 - mylogger - INFO - create hola.txt
+2023-01-09 14:07:50,765 - mylogger - INFO - dir
+2023-01-09 14:07:54,303 - mylogger - INFO - remove hola.txt
+2023-01-09 14:08:28,816 - mylogger - INFO - dir
+2023-01-09 14:08:33,065 - mylogger - INFO - create hola.txt
+2023-01-09 14:08:40,005 - mylogger - INFO - open hola.txt
+2023-01-09 14:10:59,705 - mylogger - INFO - dir
+2023-01-09 14:11:04,668 - mylogger - INFO - open hola.txt
+2023-01-09 14:18:39,779 - mylogger - INFO - dir
+2023-01-09 14:18:48,063 - mylogger - INFO - open hola.txt
+2023-01-09 14:18:49,375 - mylogger - INFO - 
+2023-01-09 14:19:17,593 - mylogger - INFO - dir
+2023-01-09 14:19:22,389 - mylogger - INFO - open hola.txt
+2023-01-09 14:19:36,932 - mylogger - INFO - create prueba.txt lorem ipsum hola como estas
+2023-01-09 14:19:41,223 - mylogger - INFO - open prueba.txt
+2023-01-09 14:19:51,784 - mylogger - INFO - remove hola.txt
+2023-01-09 14:19:53,814 - mylogger - INFO - dir
+2023-01-09 14:21:43,253 - mylogger - INFO - remove lasso.txt
+2023-01-09 14:21:54,307 - mylogger - INFO - log
+2023-01-09 14:23:42,024 - mylogger - INFO - config

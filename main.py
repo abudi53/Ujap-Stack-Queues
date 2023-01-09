@@ -1,5 +1,18 @@
 import datetime
+import logging
 import pickle
+
+import helper
+
+config = helper.read_config()
+logger = logging.getLogger("mylogger")
+logger.setLevel(logging.INFO)
+handler = logging.FileHandler(config["Logger"]["LogFilePath"])
+
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+
 
 def guardarObjeto(obj):
     try:
@@ -7,6 +20,7 @@ def guardarObjeto(obj):
             pickle.dump(obj, f, protocol=pickle.HIGHEST_PROTOCOL)
     except Exception as ex:
         print("Error during pickling object (Possibly unsupported):", ex)
+        logger.error("Exception occurred", exc_info=True)
 
 def cargarObjeto(filename):
     try:
@@ -14,90 +28,136 @@ def cargarObjeto(filename):
             return pickle.load(f)
     except Exception as ex:
         print("Error during unpickling object (Possibly unsupported):", ex)
+        logger.error("Exception occurred", exc_info=True)
 
 class Estructura():
-    def __init__(self) -> None:
-        self.path = "C:"
+    def __init__(self, path) -> None:
+        self.path = path
         self.cDir = Directorio("C:", self.path)
         self.pathlist = [self.cDir]
         self.currentDir = self.cDir
         self.pathlist = cargarObjeto("data.pickle")
         while True:
-            guardarObjeto(self.pathlist)         
-            self.currentDir = self.pathlist[-1]
-            self.path = self.currentDir.path
-            orden = input(self.currentDir.path + "> ")
-            if orden[:2] == "cd": #******CD*********
-                self.changeDir(orden[2:])
-            elif orden[:5] == "mkdir": #**********MKDIR*********
-                self.currentDir.directorios.append(self.mkDir(orden[5:]))
-            elif orden[:3] == "dir": #**********DIR*********
-                self.listDir(self.currentDir)
-            elif orden[:5] == "rmdir": #**********RMDIR*********
-                self.rmDir(orden[6:])
-            elif orden[:6] == "rename": #**********RENAME*********
-                try:
-                    self.rename(orden.split(" ")[1], orden.split(" ")[2])
-                except IndexError:
-                    print("Por favor, indique el nombre viejo y el nuevo.")
-                    
-            elif orden[:6] == "create": #**********CREATE*********
-                self.create(orden[7:])
-            elif orden[:6] == "remove": #**********REMOVE*********:
-                self.remove(orden[7:])
-            elif orden[:4] == "open": #**********OPEN*********:
-                self.open(orden[5:])
-            else:
-                print('"'+ orden + '" ' + 'no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable. \n')
+            try:
+                guardarObjeto(self.pathlist)         
+                self.currentDir = self.pathlist[-1]
+                self.path = self.currentDir.path
+                orden = input(self.currentDir.path + "> ")
+                logger.info(orden)
+                if orden[:2] == "cd": #******CD*********
+                    self.changeDir(orden[2:])
+                elif orden[:5] == "mkdir": #**********MKDIR*********
+                    check = 0
+                    for i in self.currentDir.directorios:
+                        if i.nombre == orden[6:]:
+                            check = 1
+                    if check == 0:
+                        self.currentDir.directorios.append(self.mkDir(orden[6:]))
+                    else:
+                        print('Ya existe un directorio con el nombre "' + orden[6:] + '"')
 
-    #****************DIRECTORIOS*************
+                elif orden[:3] == "dir": #**********DIR*********
+                    self.listDir(self.currentDir)
+                elif orden[:5] == "rmdir": #**********RMDIR*********
+                    self.rmDir(orden[6:])
+                elif orden[:6] == "rename": #**********RENAME*********
+                    try:
+                        self.rename(orden.split(" ")[1], orden.split(" ")[2])
+                    except IndexError:
+                        print("Por favor, indique el nombre viejo y el nuevo.")
+                        logger.exception("Exception occurred")
+                        
+                elif orden[:6] == "create": #**********CREATE*********
+                    check = 0
+                    for i in self.currentDir.directorios:
+                        if i.tipo != "<DIR>":
+                            if i.nombre == orden[7:]:
+                                check = 1
+                    if check == 0:
+                        self.create(orden[7:])    
+                    else:
+                        print('Ya existe un fichero con el nombre "' + orden[6:] + '"')
+                elif orden[:6] == "remove": #**********REMOVE*********:
+                    self.remove(orden[7:])
+                elif orden[:4] == "open": #**********OPEN*********:
+                    self.open(orden[5:])
+                    input()
+                elif orden[:3] == "log": #**********LOG*********:
+                    file = open("log/app.log", "r")
+                    print(file.read())
+                elif orden[:6] == "config": #**********CONFIG*********:
+                    file = open("config.ini", "r")
+                    print(file.read())
+                else:
+                    print('"'+ orden + '" ' + 'no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable. \n')
+            except Exception as e:
+                logger.exception("Exception occurred")
+    #vvvvvvvvvvvvvvDIRECTORIOSvvvvvvvvvvvvv
                 
     def changeDir(self, orden):
-        nombre = orden[1:]
+        try:
+            nombre = orden[1:]
+            if orden == "..":
+                if len(self.pathlist) > 1:
+                    self.pathlist.pop()
         
-        if orden == "..":
-            if len(self.pathlist) > 1:
-                self.pathlist.pop()
                 
-        elif self.currentDir.directorios == []:
-            print('No existe ningun directorio con el nombre "' + nombre + '"')
-            
-        else:
-            check = 0
-            for i in self.currentDir.directorios:
-                if i.nombre == nombre:
-                    self.pathlist.append(i)
-                    check = 1
-            if check == 0:
+            elif self.currentDir.directorios == []:
                 print('No existe ningun directorio con el nombre "' + nombre + '"')
+                
+            else:
+                check = 0
+                for i in self.currentDir.directorios:
+                    if i.nombre == nombre:
+                        self.pathlist.append(i)
+                        check = 1
+                if check == 0:
+                    print('No existe ningun directorio con el nombre "' + nombre + '"')
+        except Exception as e:
+            logger.exception("Exception occurred")
                     
     def mkDir(self, nombre):
-        return Directorio(nombre[1:], self.path + "\\" + nombre[1:])
-    
+        try:
+            return Directorio(nombre, self.path + "\\" + nombre)
+        except Exception as e:
+            logger.exception("Exception occurred")
+            
     def listDir(self, dir):
-        for i in dir.directorios:
-            print(("{:11} {:11} {:8} {:15}").format(i.fCreacion, i.hCreacion, i.tipo, i.nombre))
+        try:
+            for i in dir.directorios:
+                print(("{:11} {:11} {:8} {:15}").format(i.fCreacion, i.hCreacion, i.tipo, i.nombre))
+        except Exception as e:
+            logger.exception("Exception occurred")
             
     def rmDir(self, dir):
-        for i in self.currentDir.directorios:
-            if dir == i.nombre:
-                self.currentDir.directorios.remove(i)
-            else:
+        try:
+            ch = 0
+            for i in self.currentDir.directorios:
+                if dir == i.nombre:
+                    ch = 1
+                    self.currentDir.directorios.remove(i)
+            if ch == 0:
                 print('No existe ningun directorio con el nombre "' + dir + '"')
+
+        except Exception as e:
+            logger.exception("Exception occurred")
     
     def rename(self, old, new):
-        if self.currentDir.directorios == []:
-            print('No existe ningun directorio con el nombre "' + old + '"')
-
-        for i in self.currentDir.directorios:
-            if old == i.nombre:
-                setattr(i, "nombre", new)
-                setattr(i, "path", self.path + "\\" + new)
-            else:
+        try:
+            if self.currentDir.directorios == []:
                 print('No existe ningun directorio con el nombre "' + old + '"')
+
+            for i in self.currentDir.directorios:
+                if old == i.nombre:
+                    setattr(i, "nombre", new)
+                    setattr(i, "path", self.path + "\\" + new)
+                else:
+                    print('No existe ningun directorio con el nombre "' + old + '"')
+        except Exception as e:
+            logger.exception("Exception occurred")
                 
-    #****************DIRECTORIOS*************
-    #****************FICHEROS****************
+    #^^^^^^^^^^^^^^^^DIRECTORIOS^^^^^^^^^^^^^^^^
+    #vvvvvvvvvvvvvvvvvFICHEROSvvvvvvvvvvvvvvvvvv
     def create(self, args): # PERMITE CREAR Y AGREGAR TEXTO DIRECTAMENTE O SIMPLEMENTE CREAR
         if len(args.split(" ")) == 1:
             try:
@@ -112,34 +172,29 @@ class Estructura():
         if arg == "":
             print("Por favor, indique el nombre del archivo")
         else:
+            check = 0
             for i in self.currentDir.directorios:
                 if i.tipo != "<DIR>":
                     if arg == i.nombre:
                         self.currentDir.directorios.remove(i)
-                    else:
-                        print('No existe ningun fichero con el nombre "' + arg + '"')
+                        check = 1
+            if check == 0:
+                print('No existe ningun fichero con el nombre "' + arg + '"')
                         
     def open(self, arg):
         if arg == "":
             print("Por favor, indique el nombre del archivo")
         else:
+            check = 0
             for i in self.currentDir.directorios:
                 if i.tipo != "<DIR>":
-                    if arg == i.nombre:
+                    if i.nombre == arg:
                         print(i.contenido)
-                        input()
-                    else:
-                        print("No se ha encontrado el archivo. Por favor, vuelva a intentarlo.")
-                else:
-                    print("No se ha encontrado el archivo. Por favor, vuelva a intentarlo.")
+                        check = 1
+            if check == 0:
+                print('No existe un fichero con el nombre "' + arg + '"')
 
-    
-    
-    
-    
-    
-    
-    #****************FICHEROS****************
+    #^^^^^^^^^^^^^^^^^^FICHEROS^^^^^^^^^^^^^^^^
 
         
 
@@ -163,4 +218,6 @@ class Fichero():
         self.hCreacion = datetime.datetime.now().strftime("%X")
         
         
-main = Estructura()
+path = config["AppSettings"]["path"]
+usename = config["AppSettings"]["username"]
+main = Estructura(path)
