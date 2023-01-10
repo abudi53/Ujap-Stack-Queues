@@ -1,0 +1,34 @@
+
+ Comando dir: Listar los directorios y ficheros contenidos en la posicion
+              actual del usuario junto a la cantidad de directorios existentes
+
+ Comando cd:  permitira desplazarse entre directorios indicando como nombre del directorio y la direccion destino
+
+ 
+ Comando mkdir: permite crear un directorio pasando como
+                parametro el nombre del nuevo directorio
+
+ 
+ Comando rmdir: Este comando permite eliminar un directorio
+
+ 
+ Comando rename: Este comando debera permitir renombrar un directorio.
+
+ 
+ Comando create: Permitira la creación de ficheros recibiendo como
+                 parametro el nombre y extensian del fichero a crear
+
+ 
+ Comando remove: Permitira eliminar un archivo pasando como parametro
+                 el nombre o la direccian donde se encuentra. 
+
+ 
+ Comando open: Permitira visualizar en la consola el contenido de un
+               determinado fichero segun su nombre o su dirección y si no existe marcara error
+
+ 
+ Comando log: Este comando permite visualizar el registro de errores y
+              comandos ejecutados en el sistema
+
+ Comando config: Este comando permitira mostrar en pantalla los datos
+                 del archivo de configuracion

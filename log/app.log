@@ -67,3 +67,51 @@
 2023-01-09 14:21:43,253 - mylogger - INFO - remove lasso.txt
 2023-01-09 14:21:54,307 - mylogger - INFO - log
 2023-01-09 14:23:42,024 - mylogger - INFO - config
+2023-01-09 18:12:56,194 - mylogger - INFO - dir
+2023-01-09 18:13:01,046 - mylogger - INFO - cd gola
+2023-01-09 18:13:03,722 - mylogger - INFO - dir
+2023-01-09 18:13:24,935 - mylogger - INFO - dir
+2023-01-09 18:13:28,296 - mylogger - INFO - log
+2023-01-09 18:13:41,518 - mylogger - INFO - config
+2023-01-09 18:16:12,150 - mylogger - INFO - help
+2023-01-09 18:17:38,601 - mylogger - INFO - help
+2023-01-09 18:56:07,202 - mylogger - INFO - config
+2023-01-09 18:58:48,814 - mylogger - INFO - cd..
+2023-01-09 18:58:52,842 - mylogger - INFO - dir
+2023-01-09 19:00:17,914 - mylogger - INFO - cd hola
+2023-01-09 19:00:26,909 - mylogger - INFO - help
+2023-01-09 19:00:33,869 - mylogger - INFO - log
+2023-01-09 19:01:24,505 - mylogger - INFO - dir
+2023-01-09 19:01:32,807 - mylogger - INFO - mkdir ujap
+2023-01-09 19:01:34,950 - mylogger - INFO - dir
+2023-01-09 19:01:41,794 - mylogger - INFO - cd ujap
+2023-01-09 19:01:49,484 - mylogger - INFO - cd..
+2023-01-09 19:02:09,671 - mylogger - INFO - rename ujap ujap2
+2023-01-09 19:02:11,494 - mylogger - INFO - dir
+2023-01-09 19:02:25,907 - mylogger - INFO - create fichero.txt
+2023-01-09 19:02:29,087 - mylogger - INFO - dir
+2023-01-09 19:02:36,034 - mylogger - INFO - uhygyut
+2023-01-09 19:05:50,596 - mylogger - INFO - create fichero.txt
+2023-01-09 19:05:55,953 - mylogger - INFO - dir
+2023-01-09 19:06:28,162 - mylogger - INFO - rename fichero.txt fichero2.txt
+2023-01-09 19:07:15,313 - mylogger - INFO - create fichero2.txt hola como estas
+2023-01-09 19:07:22,468 - mylogger - INFO - open fichero2.txt
+2023-01-09 19:09:03,394 - mylogger - INFO - config
+2023-01-09 19:12:43,634 - mylogger - INFO - dir
+2023-01-09 19:22:03,745 - mylogger - INFO - config
+2023-01-09 19:22:03,750 - mylogger - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "c:\Users\pc\Documents\Repos\Ujap-Stack-Queues\main.py", line 89, in __init__
+    file = open(config["appSettings"]["config.ini"], "r")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2032.0_x64__qbz5n2kfra8p0\lib\configparser.py", line 964, in __getitem__
+    raise KeyError(key)
+KeyError: 'appSettings'
+2023-01-09 19:23:43,519 - mylogger - INFO - config
+2023-01-09 19:23:43,525 - mylogger - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "c:\Users\pc\Documents\Repos\Ujap-Stack-Queues\main.py", line 89, in __init__
+    file = open(config["appSettings"]["pathconfig"], "r")
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.2032.0_x64__qbz5n2kfra8p0\lib\configparser.py", line 964, in __getitem__
+    raise KeyError(key)
+KeyError: 'appSettings'
+2023-01-09 19:24:17,162 - mylogger - INFO - config

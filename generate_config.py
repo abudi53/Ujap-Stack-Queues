@@ -8,6 +8,10 @@ config_file.add_section("AppSettings")
 # ADD SETTINGS TO SECTION
 config_file.set("AppSettings", "path", "C")
 config_file.set("AppSettings", "userName", "Abudi")
+config_file.set("AppSettings", "pathLog", "log/app.log")
+config_file.set("AppSettings", "pathconfig", "config.ini")
+config_file.set("AppSettings", "pathhelp", "help.txt")
+
 
 config_file["Logger"]={
         "LogFilePath":"log/app.log",

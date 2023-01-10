@@ -83,10 +83,13 @@ class Estructura():
                     self.open(orden[5:])
                     input()
                 elif orden[:3] == "log": #**********LOG*********:
-                    file = open("log/app.log", "r")
+                    file = open(config["AppSettings"]["pathlog"], "r")
                     print(file.read())
                 elif orden[:6] == "config": #**********CONFIG*********:
-                    file = open("config.ini", "r")
+                    file = open(config["AppSettings"]["pathconfig"], "r")
+                    print(file.read())
+                elif orden[:4] == "help": #**********HELP*********:
+                    file = open(config["AppSettings"]["pathhelp"], "r")
                     print(file.read())
                 else:
                     print('"'+ orden + '" ' + 'no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable. \n')
